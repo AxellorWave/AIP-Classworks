@@ -94,12 +94,18 @@ int ** convert(const int * t, size_t n, const size_t * lns, size_t rows)
 {
   int ** table = new int * [rows];
   size_t k = 0;
-  for (size_t i = 0; i < rows; ++i) {
-    table[i] = new int[lns[i]];
-    for (size_t j = 0; j < lns[i]; ++j) {
-      table[i][j] = t[k];
-      ++k;
+  size_t created = 0;
+  try {
+    for (; created < rows; ++created) {
+      table[created] = new int[lns[created]];
+      for (size_t j = 0; j < lns[created]; ++j) {
+        table[created][j] = t[k];
+        ++k;
+      }
     }
+  } catch (const std::bad_alloc & e) {
+    destroy(table, created);
+    throw;
   }
   return table;
 }
