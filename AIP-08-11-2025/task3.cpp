@@ -14,7 +14,12 @@ int det(const int * a, size_t n)
   int res = 0;
   for (size_t i = 0; i < n; ++i) {
     int num = a[i];
-    int * minor = new int[(n-1)*(n-1)];
+    int * minor = nullptr;
+    try {
+      minor = new int[(n-1)*(n-1)];
+    } catch (const std::bad_alloc &) {
+      throw;
+    }
     size_t count = 0;
     for (size_t j = 1; j < n; ++j) {
       for (size_t k = 0; k < n; ++k) {
@@ -24,20 +29,32 @@ int det(const int * a, size_t n)
         }
       }
     }
-    if (i % 2 == 0) {
-      res += num * det(minor, n-1);
-    } else {
-      res -= num * det(minor, n-1);
+    try {
+      if (i % 2 == 0) {
+        res += num * det(minor, n-1);
+      } else {
+        res -= num * det(minor, n-1);
+      }
+    } catch (const std::bad_alloc &) {
+      delete[] minor;
+      throw;
     }
+    delete[] minor;
   }
   return res;
 }
 
 int main()
 {
-  int * matrix = new int[9];
+  int * matrix = nullptr;
+  try {
+    matrix = new int[9];
+  } catch (const std::bad_alloc &) {
+    return 1;
+  }
   for (size_t i = 1; i < 10; ++i){
     matrix[i-1] = i;
   }
   std::cout << det(matrix, 3) << "\n"; 
+  delete[] matrix;
 }
