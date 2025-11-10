@@ -30,4 +30,10 @@ int det(int * b, const int * lhs, size_t n)
     int * next = b + (n - 1) * (n - 1);
     d += lhs[l] * det(next, minor, n - 1) * ((l % 2) ? -1 : 1);
   }
+  return d;
+}
+
+int main() 
+{
+
 }
