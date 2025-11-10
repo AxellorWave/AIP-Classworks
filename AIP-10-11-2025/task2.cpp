@@ -13,7 +13,7 @@ int det(const int * a, size_t n)
   }
   int res = 0;
   for (size_t i = 0; i < n; ++i) {
-    int num = a[i];
+    int pivot = a[i];
     int * minor = nullptr;
     try {
       minor = new int[(n-1)*(n-1)];
@@ -24,16 +24,16 @@ int det(const int * a, size_t n)
     for (size_t j = 1; j < n; ++j) {
       for (size_t k = 0; k < n; ++k) {
         if (k != i) {
-          minor[count] = (i + j) * n + k;
+          minor[count] = a[j * n + k];
           ++count;
         }
       }
     }
     try {
       if (i % 2 == 0) {
-        res += num * det(minor, n-1);
+        res += pivot * det(minor, n-1);
       } else {
-        res -= num * det(minor, n-1);
+        res -= pivot * det(minor, n-1);
       }
     } catch (const std::bad_alloc &) {
       delete[] minor;
