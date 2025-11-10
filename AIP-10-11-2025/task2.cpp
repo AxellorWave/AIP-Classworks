@@ -15,11 +15,7 @@ int det(const int * a, size_t n)
   for (size_t i = 0; i < n; ++i) {
     int pivot = a[i];
     int * minor = nullptr;
-    try {
-      minor = new int[(n-1)*(n-1)];
-    } catch (const std::bad_alloc &) {
-      throw;
-    }
+    minor = new int[(n-1)*(n-1)];
     size_t count = 0;
     for (size_t j = 1; j < n; ++j) {
       for (size_t k = 0; k < n; ++k) {
