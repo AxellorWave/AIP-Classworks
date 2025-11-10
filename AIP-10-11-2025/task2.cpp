@@ -51,6 +51,11 @@ int main()
   for (size_t i = 1; i < 10; ++i){
     matrix[i-1] = i;
   }
-  std::cout << det(matrix, 3) << "\n"; 
+  try {
+    std::cout << det(matrix, 3) << "\n"; 
+  } catch (const std::bad_alloc &) {
+    delete[] matrix;
+    return 1;
+  }
   delete[] matrix;
 }
