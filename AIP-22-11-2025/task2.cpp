@@ -55,7 +55,11 @@ Ints::Ints():
 
 Ints::Ints(size_t k, int i):
   k(k), d(k ? new int[k] : nullptr)
-{}
+{
+  for (size_t j = 0; j < i; ++j) {
+    d[i] = k;
+  }
+}
 
 Ints::Ints(const Ints & w):
   k(w.k), d(k ? new int[k] : nullptr)
@@ -164,7 +168,8 @@ p_t Points::get(size_t id) const
   return r;
 }
 
-Points::Points(Ints && d) : data(std::move(d))
+Points::Points(Ints && d): 
+  data(std::move(d))
 {}
 
 Points Points::append(p_t a) const
@@ -172,6 +177,13 @@ Points Points::append(p_t a) const
   Ints delta(2, a.x);
   delta.set(1, a.y);
   delta=data.append(delta);
+  return Points(std::move(delta));
+}
+
+Points Points::append(const Points & w) const
+{
+  Ints delta(w.data);
+  delta = data.append(delta);
   return Points(std::move(delta));
 }
 
