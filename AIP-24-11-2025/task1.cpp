@@ -74,5 +74,24 @@ bool isBetter(const Subj & sub, int y1, int y2)
   return n_y1 * m_y2 > n_y2 * m_y1; 
 }
 
+const Stud ** dobsovs(const Subj & sub, size_t & dobs, size_t vis)
+{
+  size_t count_dobs = 0;
+  for (size_t i = 0; i < sub.people; ++i) {
+    if (vis > sub.visited[i]) {
+      ++count_dobs;
+    }
+  }
+  const Stud ** res = new Stud * [count_dobs];
+  dobs = count_dobs;
+  size_t j = 0;
+  for (size_t i = 0; i < sub.people; ++i) {
+    if (vis > sub.visited[i]) {
+      res[j++] = sub.studs[i];
+    }
+  }
+  return res;
+}
+
 int main()
 {}
