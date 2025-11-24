@@ -37,5 +37,8 @@ const Stud ** studDep(const Stud * const * studs, size_t k, int dep, size_t & fo
   return r;
 }
 
+const Stud *** studDeps(const Stud * const * studs, size_t k, int max_dep, size_t ** found) 
+{}
+
 int main()
 {}
