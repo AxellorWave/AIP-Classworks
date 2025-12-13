@@ -138,6 +138,45 @@ const Stud ** stud_union_bach(size_t & r, const Subj * ss, size_t k)
   return uni;
 }
 
+bool is_year_y(const Stud * stud, int y) {
+  return stud->year == y;
+}
+
+template< size_t Y >
+bool is_year_Y(const Stud * stud) {
+  return stud->year == Y;
+}
+
+bool (*is_year_y(int y))(const Stud * stud) {
+  switch (y) {
+    case 1: return is_year_Y< 1 >;
+    case 2: return is_year_Y< 2 >;
+    case 3: return is_year_Y< 3 >;
+    case 4: return is_year_Y< 4 >;
+    case 5: return is_year_Y< 5 >;
+    case 6: return is_year_Y< 6 >;
+    default: throw std::logic_error("bad year");
+  }
+}
+
+const Stud ** stud_union_y(size_t & r, const Subj * ss, size_t k, int y)
+{
+  size_t count = 0;
+  const Stud ** uni = stud_union(count, ss, k);
+  try {
+    size_t tmp_count = 0;
+    const Stud ** tmp = filter(tmp_count, uni, count, is_year_y(y));
+    delete[] uni;
+    uni = tmp;
+    count = tmp_count;
+  } catch (...) {
+    delete[] uni;
+    throw;
+  }
+  r = count;
+  return uni;
+}
+
 int main()
 {
 
