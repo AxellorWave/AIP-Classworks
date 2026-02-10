@@ -81,20 +81,34 @@ size_t erase(int ** a, size_t s, int v)
 
 }
 
+int * stable_partition(int * a, size_t s, bool(*cond)(int))
+{
+  int * res = nullptr;
+  for (size_t i = s; i != 0; --i) {
+    if (!cond(a[i])) {
+      res = remove(a, s, i);
+      --s;
+    }
+  }
+  return res;
+}
+
+bool mod2(int n) {
+  return n % 2;
+}
+
 int main()
 {
-  const int * a = new const int[5] {0, 1, 2, 3, 4};
-  int * res = nullptr;
-  try {
-    res = erase(a, 5, 2);
-  } catch (const std::exception & e) {
-    std::cerr << e.what() << "\n";
-    return 1;
+  size_t n = 9;
+  int * a = new int[n] {1, 2, 3, 4, 5 , 6, 7, 8, 9};
+  for (size_t i = 0; i < n; i++) {
+    std::cout << a[i] << " ";
   }
-  for (size_t i = 0; i < 4; i++) {
-    std::cout << res[i] << " ";
+  std::cout << "\n";
+  int * res2 = stable_partition(a, n, mod2);
+  for (size_t i = 0; i < n; i++) {
+    std::cout << a[i] << " ";
   }
   std::cout << "\n";
   delete[] a;
-  delete[] res;
 }
