@@ -23,17 +23,36 @@ void insert(int ** a, size_t s, size_t i, int v)
   *a = res;
 }
 
+int * erase(const int * a, size_t s, size_t i)
+{
+  int * res = new int[s - 1];
+  for (size_t j = 0; j < i; ++j) {
+    res[j] = a[j];
+  }
+  for (size_t j = i + 1; j < s + 1; ++j) {
+    res[j - 1] = a[j];
+  }
+  return res;
+}
+
+void erase(int ** a, size_t s, size_t i)
+{
+  int * res  = erase(*a, s, i);
+  delete[] *a;
+  *a = res;
+}
+
 int main()
 {
   const int * a = new const int[5] {0, 1, 2, 3, 4};
   int * res = nullptr;
   try {
-    res = insert(a, 5, 2, 67);
+    res = erase(a, 5, 2);
   } catch (const std::exception & e) {
     std::cerr << e.what() << "\n";
     return 1;
   }
-  for (size_t i = 0; i < 6; i++) {
+  for (size_t i = 0; i < 4; i++) {
     std::cout << res[i] << " ";
   }
   std::cout << "\n";
