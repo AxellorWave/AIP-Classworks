@@ -42,6 +42,45 @@ void erase(int ** a, size_t s, size_t i)
   *a = res;
 }
 
+int * remove(int * a, size_t s, size_t i)
+{
+  int to_rm = std::move(a[i]);
+  for (size_t j = i; j < s - 1; ++j) {
+    a[j] = std::move(a[j + 1]);
+  }
+  a[s] = std::move(to_rm);
+  return a + s - 1;
+}
+
+int * remove(int * a, size_t s, int v)
+{
+  for (size_t i = 0; i < s; ++i) {
+    if (a[i] == v) {
+      remove(a, s--, i--);
+    }
+  }
+  return a + s;
+}
+
+int * cut(const int * a, size_t s)
+{
+  int * t = new int[s];
+  for (size_t i = 0; i < s; ++i) {
+    t[i] = a[i];
+  }
+  return t;
+}
+
+size_t erase(int ** a, size_t s, int v)
+{
+  size_t upd = remove(*a, s, v) - *a;
+  int * t = cut(*a, upd);
+  delete[] (*a);
+  (*a) = t;
+  return upd;
+
+}
+
 int main()
 {
   const int * a = new const int[5] {0, 1, 2, 3, 4};
