@@ -33,3 +33,41 @@ T * reverse(const T * a, size_t s)
   }
   return r;
 }
+
+template< class T >
+void reverse(T * a, size_t s, size_t & z)
+{
+  z = 0;
+  for (size_t i = 0; i < s / 2; ++i) {
+    std::swap(a[i], a[s - (i+1)]);// huinia, tak ne delaem
+    ++z;
+  }
+}
+
+bool istoerase(size_t toerase, const size_t * eids, size_t id)
+{
+  for (size_t i = 0; i < toerase; ++i) {
+    if (id == eids[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+template< class T >
+T * erase(size_t & valid, const T * a, size_t s, const size_t * eids, size_t toerase)
+{
+  valid = 0;
+  T * res = nullptr;
+  try {
+    res = new T[s - toerase];
+    size_t j = 0;
+    for (size_t i = 0; i < s; ++i) {
+      if (!istoerase(toerase, eids, i)) {
+        res[j++] = a[i];
+        ++valid;
+      }
+    }
+  } catch (...) {}
+  return res;
+}
