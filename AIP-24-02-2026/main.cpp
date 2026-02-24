@@ -93,7 +93,7 @@ ListOfVecIt< T > next(ListOfVecIt< T > it)
     return {it.curr, it.i + 1};
   } else {
     it.curr = it.curr->next;
-    while (it.curr->val.data == nullptr) {
+    while (it.curr != nullptr && it.curr->val.data == nullptr) {
       it.curr = it.curr->next;
     }
     return {it.curr, 0};
