@@ -3,6 +3,7 @@ struct Vec {
   T* data;
   size_t s;
 };
+
 template< class T >
 struct VecIt {
   T* data;
@@ -32,4 +33,35 @@ template < class T >
 T & value(VecIt< T > it)
 {
   return it.data[it.i];
+}
+
+template< class T >
+struct VecRIT {
+  *data;
+  size_t s, i;
+};
+
+template< class T >
+VecRIT< T > begin(Vec< T > v)
+{
+  return {v.data, v.s, v.s};
+}
+
+template< class T >
+T & value(VecRIT< T > it)
+{
+  return it.data[it.i - 1];
+}
+
+template< class T >
+bool hasNext(VecRIT< T > it)
+{
+  return it.i;
+}
+
+template< class T >
+VecRIT< T > prev(VecRIT< T > it)
+{
+  it.i--;
+  return it;
 }
