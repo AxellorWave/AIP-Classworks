@@ -46,15 +46,12 @@ List< Vec< T > > * copy(List< Vec< T > > * h)
 {
   List< Vec< T > > * res = nullptr;
   try {
-    res = new List< Vec< T > >;
+    res = new List< Vec< T > >{copy(h->val), nullptr};
     List< Vec< T > > * c = res;
-    while (h) {
-      c->val = copy(h->val);
-      if (h->next) {
-        c->next = new List< Vec< T > >;
-      }
-      c = c->next;
+    while (h->next) {
       h = h->next;
+      c->next = new List< Vec< T > >{copy(h->val), nullptr};
+      c = c->next;
     }
   } catch (...) {
     clear(res);
