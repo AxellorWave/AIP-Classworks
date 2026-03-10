@@ -60,6 +60,18 @@ List< Vec< T > > * copy(List< Vec< T > > * h)
   return res;
 }
 
+template< class T >
+List< T > * next(List< T > * node)
+{
+  return node->next;
+}
+
+template< class T >
+bool hasNext(List< T > * node)
+{
+  return node->next != 0;
+}
+
 int main()
 {
   List< Vec< int > >* h = new List<Vec<int>>;

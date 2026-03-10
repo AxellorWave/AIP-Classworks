@@ -128,17 +128,4 @@ size_t count(const List< T > * h, C c,
 
 int main()
 {
-  List<int>* oak = new List<int>{1, nullptr};
-  oak->next = new List<int>{2, nullptr};
-  oak->next->next = new List<int>{3, nullptr};
-  oak->next->next->next = new List<int>{4, nullptr};
-  oak->next->next->next->next = new List<int>{5, nullptr};
-  oak->next->next->next->next->next = new List<int>{6, nullptr};
-
-  List< const List< int >* >* chead;
-  List< const List< int >* >* ctail;
-
-  size_t co = count(oak, [](int a) {return a%2==0;}, &chead, &ctail);
-
-  delete oak;
 }
