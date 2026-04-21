@@ -1,0 +1,54 @@
+---
+BasedOnStyle: LLVM
+Language: Cpp
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+ColumnLimit: 100
+ContinuationIndentWidth: 4
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: true
+  AfterControlStatement: Always
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: true
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortBlocksOnASingleLine: Never
+AllowShortLambdasOnASingleLine: None
+SpaceBeforeParens: ControlStatements
+SpaceBeforeSquareBrackets: false
+DerivePointerAlignment: false
+PointerAlignment: Right
+SpacesInAngles: Always
+SpaceInEmptyParentheses: false
+BreakConstructorInitializers: BeforeComma
+ConstructorInitializerIndentWidth: 2
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+NamespaceIndentation: All
+IndentCaseLabels: false
+MaxEmptyLinesToKeep: 1
+AlignAfterOpenBracket: Align
+BinPackParameters: false
+AlignOperands: Align
+AlignTrailingComments: true
+IncludeBlocks: Regroup
+SortIncludes: true
+IncludeCategories:
+  - Regex: '^".*\.h"$|<.*\.h>'
+    Priority: 1
+  - Regex: '^(<vector>|<string>|<iostream>|<algorithm>|<memory>)'
+    Priority: 2
+  - Regex: '^<.*>$'
+    Priority: 3

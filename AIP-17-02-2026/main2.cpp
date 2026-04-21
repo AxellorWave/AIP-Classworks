@@ -1,52 +1,56 @@
 #include <iostream>
 
-template< class T >
-struct List {
+template < class T > struct List
+{
   T val;
-  const T * next;
+  const T *next;
 };
 
-template< class T >
-List< T > * clear(List< T > * start, List< T > * end)
+template < class T > List< T > *clear(List< T > *start, List< T > *end)
 {
-  while (start != end) {
-    List< T > * temp = start->next;
+  while (start != end)
+  {
+    List< T > *temp = start->next;
     delete start;
     start = temp;
   }
   return end;
 }
 
-template< class T >
-List< T > * convert(const T * data, size_t s)
+template < class T > List< T > *convert(const T *data, size_t s)
 {
-  List< T > * h = new List< T >{data[0], nullptr};
-  List< T > * tail = h;
-  try {
-    for (size_t i = 1; i < s; ++i) {
-      List< T > * node = new List< T >{data[i], nullptr};
+  List< T > *h = new List< T >{data[0], nullptr};
+  List< T > *tail = h;
+  try
+  {
+    for (size_t i = 1; i < s; ++i)
+    {
+      List< T > *node = new List< T >{data[i], nullptr};
       tail->next = node;
       tail = node;
     }
-  } catch (...) {
+  } catch (...)
+  {
     clear(h, nullptr);
     throw;
   }
   return h;
 }
 
-template< class T >
-List< T > * convert(const T * data, size_t s, List< T > ** tail)
+template < class T > List< T > *convert(const T *data, size_t s, List< T > **tail)
 {
-  List< T > * h = new List< T >{data[0], nullptr};
-  List< T > * t = h;
-  try {
-    for (size_t i = 1; i < s; ++i) {
-      List< T > * node = new List< T >{data[i], nullptr};
+  List< T > *h = new List< T >{data[0], nullptr};
+  List< T > *t = h;
+  try
+  {
+    for (size_t i = 1; i < s; ++i)
+    {
+      List< T > *node = new List< T >{data[i], nullptr};
       t->next = node;
       t = node;
     }
-  } catch (...) {
+  } catch (...)
+  {
     clear(h, nullptr);
     throw;
   }
@@ -75,29 +79,32 @@ List< T > * convert(const T * data, size_t s, List< T > ** tail)
 //   return res;
 // }
 
-template< class T >
-List< const List< T > * > * clear(List< const List< T > * > * start, List< const List< T > * > * end)
+template < class T >
+List< const List< T > * > *clear(List< const List< T > * > *start, List< const List< T > * > *end)
 {
-  while (start != end) {
-    List< const List< T > * > * temp = start->next;
+  while (start != end)
+  {
+    List< const List< T > * > *temp = start->next;
     delete start;
     start = temp;
   }
   return end;
 }
 
-template< class T, class C >
-size_t count(const List< T > * h, C c,
-  List< const List< T > * > ** chead,
-  List< const List< T > * > ** ctail)
+template < class T, class C >
+size_t
+count(const List< T > *h, C c, List< const List< T > * > **chead, List< const List< T > * > **ctail)
 {
-  List< const List< T > * > * head = new List< const List< T > * >;
-  List< const List< T > * > * tail = head;
+  List< const List< T > * > *head = new List< const List< T > * >;
+  List< const List< T > * > *tail = head;
   size_t res = 0;
-  const List< T > * t = h;
-  try {
-    while (t != nullptr) {
-      if (c(t)) {
+  const List< T > *t = h;
+  try
+  {
+    while (t != nullptr)
+    {
+      if (c(t))
+      {
         head->val = t;
         head->next = nullptr;
         ++res;
@@ -107,16 +114,19 @@ size_t count(const List< T > * h, C c,
     }
 
     t = t->next;
-    while (t != nullptr) {
-      if (c(t)) {
-        List< const List< T > * > * n = new List< const List< T > * >{t, nullptr};
+    while (t != nullptr)
+    {
+      if (c(t))
+      {
+        List< const List< T > * > *n = new List< const List< T > * >{t, nullptr};
         tail->next = n;
         tail = n;
         ++res;
       }
       t = t->next;
     }
-  } catch (...) {
+  } catch (...)
+  {
     clear(head, nullptr);
     throw;
   }
