@@ -10,7 +10,7 @@ BreakBeforeBraces: Custom
 BraceWrapping:
   AfterCaseLabel: false
   AfterClass: true
-  AfterControlStatement: Always
+  AfterControlStatement: Never
   AfterEnum: true
   AfterFunction: true
   AfterNamespace: true
@@ -18,7 +18,7 @@ BraceWrapping:
   AfterUnion: true
   AfterExternBlock: false
   BeforeCatch: false
-  BeforeElse: true
+  BeforeElse: false
   IndentBraces: false
   SplitEmptyFunction: true
   SplitEmptyRecord: true
@@ -30,7 +30,7 @@ AllowShortLambdasOnASingleLine: None
 SpaceBeforeParens: ControlStatements
 SpaceBeforeSquareBrackets: false
 DerivePointerAlignment: false
-PointerAlignment: Right
+PointerAlignment: Left
 SpacesInAngles: Always
 SpaceInEmptyParentheses: false
 BreakConstructorInitializers: BeforeComma
